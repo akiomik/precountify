@@ -7,6 +7,6 @@ A tool for pre-countifying
 # install
 pipenv install
 
-# update `precountify` command
+# update dependencies or `precountify` command
 pipenv install --upgrade .
 ```
