@@ -1,6 +1,8 @@
 import numpy as np
+import librosa
 
 from audio_file import AudioFile
+from mono import Mono
 
 
 class Stereo(AudioFile):
@@ -29,3 +31,6 @@ class Stereo(AudioFile):
 
     def is_mono(self):
         return False
+
+    def to_mono(self):
+        return Mono(librosa.to_mono(self.data), self.sr)

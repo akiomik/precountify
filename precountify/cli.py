@@ -22,10 +22,19 @@ def load(filename, sr, mono=False):
         return Stereo(y, sr)
 
 
+def import_string(path):
+    *path_components, cls_name = path.split('.')
+    module_name = '.'.join(path_components)
+    module = __import__(
+        module_name, fromlist=[cls_name])
+    return getattr(module, cls_name)
+
+
 def run(
     input_file, output_file,
     sr=None, bpm=None, meter=4, measure=2, upbeat=0, offset=0,
-    click='data/click.wav'
+    click='data/click.wav',
+    estimator='librosa_tempo_estimator.LibrosaTempoEstimator'
 ):
     # TODO
     assert sr is None or sr > 0
@@ -35,11 +44,13 @@ def run(
     assert meter > upbeat >= 0
     assert offset >= 0
 
-    if bpm is None:
-        bpm = 240  # TODO
-
     audio = load(input_file, sr)
     audio = audio.trim()
+
+    if bpm is None:
+        estimator_cls = import_string(estimator)
+        bpm = estimator_cls.estimate(audio)
+        print('[INFO] estimated bpm:', bpm)
 
     seconds_per_beat = 1 / (bpm / 60)
     n_click_samples = librosa.time_to_samples(seconds_per_beat, audio.sr)
