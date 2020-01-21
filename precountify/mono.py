@@ -29,3 +29,8 @@ class Mono(AudioFile):
 
     def is_mono(self):
         return True
+
+    @classmethod
+    def empty(cls, sr, filename=None):
+        data = np.empty(0, dtype=np.float32)
+        return cls(data, sr, filename)

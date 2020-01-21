@@ -36,6 +36,11 @@ class AudioFile(ABC):
     def is_mono(self):
         pass
 
+    @classmethod
+    @abstractmethod
+    def empty(cls, sr, filename=None):
+        pass
+
     def _tile(self, n):
         return np.tile(self.data, n)
 

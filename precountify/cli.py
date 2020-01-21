@@ -33,7 +33,7 @@ def import_string(path):
 
 def run(
     input_file, output_file,
-    sr=None, bpm=None, meter=4, measure=2, upbeat=0, offset=0,
+    sr=None, bpm=None, meter=4, measure=2, upbeat=0, offset=0, margin=0,
     click='data/click.wav',
     estimator='precountify.librosa_tempo_estimator.LibrosaTempoEstimator'
 ):
@@ -44,6 +44,7 @@ def run(
     assert measure >= 1
     assert meter > upbeat >= 0
     assert offset >= 0
+    assert margin >= 0
 
     audio = load(input_file, sr)
     audio = audio.trim()
@@ -60,6 +61,14 @@ def run(
 
     n_beats = meter * measure - upbeat
     precount = click.tile(n_beats)
+
+    if margin > 0:
+        n_margin_samples = librosa.time_to_samples(margin, audio.sr)
+        if audio.is_mono():
+            empty = Mono.empty(audio.sr)
+        else:
+            empty = Stereo.empty(audio.sr)
+        precount = empty.resize(n_margin_samples).append(precount)
 
     n_offset_samples = librosa.time_to_samples(offset, audio.sr)
     offsetted = audio.drop(n_offset_samples)

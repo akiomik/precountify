@@ -7,7 +7,7 @@ from .mono import Mono
 
 class Stereo(AudioFile):
     def __init__(self, data, sr, filename):
-        assert data.ndim == 2
+        assert data.ndim == 2 and data.shape[0] == 2
         super(Stereo, self).__init__(data, sr, filename)
 
     def resize(self, n):
@@ -34,3 +34,8 @@ class Stereo(AudioFile):
 
     def to_mono(self):
         return Mono(librosa.to_mono(self.data), self.sr, self.filename)
+
+    @classmethod
+    def empty(cls, sr, filename=None):
+        data = np.empty((2, 0), dtype=np.float32)
+        return cls(data, sr, filename)
