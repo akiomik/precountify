@@ -7,6 +7,9 @@ A tool for pre-countifying
 # install
 pipenv install
 
-# update dependencies or `precountify` command
-pipenv install --upgrade .
+# update dependencies
+pipenv update
+
+# update `precountify` command
+pipenv run pip install --upgrade .
 ```
