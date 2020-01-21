@@ -15,5 +15,5 @@ precountify input.wav output.wav
 precountify input.wav output.wav --bpm 120
 
 # Use `MadmomTempoEstimator`
-precountify input.wav output.wav --estimator 'precountify.madmom_tempo_estimator.MadmomTempoEstimator'
+precountify input.wav output.wav --estimator 'precountify.estimator.madmom.MadmomTempoEstimator'
 ```

@@ -35,7 +35,7 @@ def run(
     input_file, output_file,
     sr=None, bpm=None, meter=4, measure=2, upbeat=0, offset=0, margin=0,
     click='data/click.wav',
-    estimator='precountify.librosa_tempo_estimator.LibrosaTempoEstimator'
+    estimator='precountify.estimator.librosa.LibrosaTempoEstimator'
 ):
     # TODO
     assert sr is None or sr > 0
