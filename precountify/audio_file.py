@@ -6,10 +6,11 @@ import soundfile as sf
 
 
 class AudioFile(ABC):
-    def __init__(self, data, sr):
+    def __init__(self, data, sr, filename):
         super(AudioFile, self).__init__()
         self.data = data
         self.sr = sr
+        self.filename = filename
 
     @abstractmethod
     def resize(self, length):

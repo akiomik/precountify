@@ -17,9 +17,9 @@ def load(filename, sr, mono=False):
         return
 
     if y.ndim == 1:
-        return Mono(y, sr)
+        return Mono(y, sr, filename)
     else:
-        return Stereo(y, sr)
+        return Stereo(y, sr, filename)
 
 
 def import_string(path):

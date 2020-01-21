@@ -4,28 +4,28 @@ from audio_file import AudioFile
 
 
 class Mono(AudioFile):
-    def __init__(self, data, sr):
+    def __init__(self, data, sr, filename):
         assert data.ndim == 1
-        super(Mono, self).__init__(data, sr)
+        super(Mono, self).__init__(data, sr, filename)
 
     def resize(self, n):
         data = self.data.copy()
         data.resize(n)
-        return Mono(data, self.sr)
+        return Mono(data, self.sr, self.filename)
 
     def drop(self, n):
-        return Mono(self.data[n:], self.sr)
+        return Mono(self.data[n:], self.sr, self.filename)
 
     def append(self, that):
         assert self.data.ndim == that.data.ndim
         concat = np.concatenate([self.data, that.data])
-        return Mono(concat, self.sr)
+        return Mono(concat, self.sr, self.filename)
 
     def tile(self, n):
-        return Mono(self._tile(n), self.sr)
+        return Mono(self._tile(n), self.sr, self.filename)
 
     def trim(self):
-        return Mono(self._trim(), self.sr)
+        return Mono(self._trim(), self.sr, self.filename)
 
     def is_mono(self):
         return True
