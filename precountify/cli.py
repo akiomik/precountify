@@ -1,5 +1,6 @@
 import fire
 import librosa
+import os
 
 from .mono import Mono
 from .stereo import Stereo
@@ -33,8 +34,8 @@ def import_string(path):
 
 def run(
     input_file, output_file,
-    sr=None, bpm=None, meter=4, measure=2, upbeat=0, offset=0, margin=0,
-    click='data/click.wav',
+    sr=None, bpm=None, click=None,
+    meter=4, measure=2, upbeat=0, offset=0, margin=0,
     estimator='precountify.estimator.librosa.LibrosaTempoEstimator'
 ):
     # TODO
@@ -53,6 +54,9 @@ def run(
         estimator_cls = import_string(estimator)
         bpm = estimator_cls.estimate(audio)
         print('[INFO] estimated bpm:', bpm)
+
+    if click is None:
+        click = os.path.join(os.path.dirname(__file__), 'data/click.wav')
 
     seconds_per_beat = 1 / (bpm / 60)
     n_click_samples = librosa.time_to_samples(seconds_per_beat, audio.sr)
