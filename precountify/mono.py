@@ -1,6 +1,6 @@
 import numpy as np
 
-from audio_file import AudioFile
+from .audio_file import AudioFile
 
 
 class Mono(AudioFile):

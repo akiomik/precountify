@@ -1,8 +1,8 @@
 import fire
 import librosa
 
-from mono import Mono
-from stereo import Stereo
+from .mono import Mono
+from .stereo import Stereo
 
 
 def load(filename, sr, mono=False):
@@ -35,7 +35,7 @@ def run(
     input_file, output_file,
     sr=None, bpm=None, meter=4, measure=2, upbeat=0, offset=0,
     click='data/click.wav',
-    estimator='librosa_tempo_estimator.LibrosaTempoEstimator'
+    estimator='precountify.librosa_tempo_estimator.LibrosaTempoEstimator'
 ):
     # TODO
     assert sr is None or sr > 0

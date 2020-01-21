@@ -1,8 +1,8 @@
 import numpy as np
 import librosa
 
-from audio_file import AudioFile
-from mono import Mono
+from .audio_file import AudioFile
+from .mono import Mono
 
 
 class Stereo(AudioFile):

@@ -1,6 +1,6 @@
 import librosa
 
-from tempo_estimator import TempoEstimator
+from .tempo_estimator import TempoEstimator
 
 
 class LibrosaTempoEstimator(TempoEstimator):
