@@ -23,8 +23,9 @@ def load(filename, sr, mono=False):
 
 
 def import_string(path):
-    *path_components, cls_name = path.split('.')
-    module_name = '.'.join(path_components)
+    path_components = path.split('.')
+    cls_name = path_components[-1]
+    module_name = '.'.join(path_components[:-1])
     module = __import__(
         module_name, fromlist=[cls_name])
     return getattr(module, cls_name)
