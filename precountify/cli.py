@@ -2,8 +2,8 @@ import fire
 import librosa
 import os
 
-from .mono import Mono
-from .stereo import Stereo
+from .audio.mono import Mono
+from .audio.stereo import Stereo
 
 
 def load(filename, sr, mono=False):
