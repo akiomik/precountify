@@ -101,6 +101,13 @@
             ],
             "version": "==0.3"
         },
+        "fire": {
+            "hashes": [
+                "sha256:6865fefc6981a713d2ce56a2a2c92c56c729269f74a6cddd6f4b94d16ae084c9"
+            ],
+            "index": "pypi",
+            "version": "==0.2.1"
+        },
         "flake8": {
             "hashes": [
                 "sha256:45681a117ecc81e870cbf1262835ae4af5e7a8b08e40b944a8a6e6b895914cfb",
@@ -364,6 +371,12 @@
                 "sha256:b361d4ac1519a2e516cabafa6bf7e93492f999f35d7d25350cd87fdc3e5cb27e"
             ],
             "version": "==0.10.3.post1"
+        },
+        "termcolor": {
+            "hashes": [
+                "sha256:1d6d69ce66211143803fbc56652b41d73b4a400a2891d7bf7a1cdf4c02de613b"
+            ],
+            "version": "==1.1.0"
         },
         "wcwidth": {
             "hashes": [
