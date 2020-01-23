@@ -1,26 +1,10 @@
 import fire
-import librosa
 import os
 
-from .audio.mono import Mono
-from .audio.stereo import Stereo
-
-
-def load(filename, sr, mono=False):
-    y, sr = librosa.load(filename, sr, mono=mono)
-
-    if y.ndim > 2:
-        print('`input_file` is supported only mono or stereo.')
-        return
-
-    if sr > 44100:
-        print('`sr` is only supported up to 44100')
-        return
-
-    if y.ndim == 1:
-        return Mono(y, sr, filename)
-    else:
-        return Stereo(y, sr, filename)
+from .click import Click
+from .margin import Margin
+from .music import Music
+from .precount import Precount
 
 
 def import_string(path):
@@ -47,37 +31,28 @@ def run(
     assert offset >= 0
     assert margin >= 0
 
-    audio = load(input_file, sr)
-    audio = audio.trim()
+    music = Music.from_file(input_file, sr).trimmed()
+
+    if offset > 0:
+        music = music.offsetted(offset)
 
     if bpm is None:
         estimator_cls = import_string(estimator)
-        bpm = estimator_cls.estimate(audio)
+        bpm = estimator_cls.estimate(music.audio)
         print('[INFO] estimated bpm:', bpm)
 
     if click is None:
         click = os.path.join(os.path.dirname(__file__), 'data/click.wav')
 
-    seconds_per_beat = 1 / (bpm / 60)
-    n_click_samples = librosa.time_to_samples(seconds_per_beat, audio.sr)
-    click = load(click, audio.sr, audio.is_mono())
-    click = click.resize(n_click_samples)
-
-    n_beats = meter * measure - upbeat
-    precount = click.tile(n_beats)
+    click = Click(click, music.audio.sr, bpm, music.audio.is_mono())
+    precount = Precount.from_click(click, meter, measure, upbeat)
 
     if margin > 0:
-        n_margin_samples = librosa.time_to_samples(margin, audio.sr)
-        if audio.is_mono():
-            empty = Mono.empty(audio.sr)
-        else:
-            empty = Stereo.empty(audio.sr)
-        precount = empty.resize(n_margin_samples).append(precount)
+        margin = Margin(margin, music.audio.sr, music.audio.is_mono())
+        precount = precount.prepend(margin)
 
-    n_offset_samples = librosa.time_to_samples(offset, audio.sr)
-    offsetted = audio.drop(n_offset_samples)
-    precountified = precount.append(offsetted)
-    precountified.save(output_file)
+    precountified = music.prepend(precount)
+    precountified.audio.save(output_file)
 
 
 def main():
