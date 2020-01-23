@@ -1,3 +1,5 @@
+import os
+
 import librosa
 
 from .audio.mono import Mono
@@ -26,3 +28,7 @@ class Click:
 
     def samples_per_beat(self):
         return librosa.time_to_samples(self.seconds_per_beat(), self.sr)
+
+    @classmethod
+    def preset(cls):
+        return os.path.join(os.path.dirname(__file__), 'data/click.wav')

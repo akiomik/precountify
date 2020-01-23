@@ -5,7 +5,7 @@ from .audio.stereo import Stereo
 
 
 class Margin:
-    def __init__(self, margin_in_seconds, sr, mono):
+    def __init__(self, margin_in_seconds, sr, mono=False):
         assert margin_in_seconds >= 0
         assert sr > 0
 

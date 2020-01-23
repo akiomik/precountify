@@ -13,6 +13,8 @@ class Music:
 
     @classmethod
     def from_file(cls, filename, sr=None):
+        assert sr is None or sr > 0
+
         y, sr = librosa.load(filename, sr, mono=False)
         if y.ndim == 1:
             audio = Mono(y, sr, filename)
@@ -20,6 +22,7 @@ class Music:
             audio = Stereo(y, sr, filename)
         else:
             raise ValueError('Music is supported only mono or stereo file.')
+
         return cls(audio)
 
     def trimmed(self):

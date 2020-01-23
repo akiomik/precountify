@@ -44,3 +44,7 @@ def test_samples_per_beat():
 
     click = Click(filename, 22050, 120, False)
     assert click.samples_per_beat() == 11025
+
+
+def test_preset():
+    assert os.path.exists(Click.preset())
