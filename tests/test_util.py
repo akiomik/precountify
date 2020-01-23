@@ -4,7 +4,8 @@ from precountify.estimator.madmom import MadmomTempoEstimator
 
 
 def test_import_string():
-    librosa = import_string('precountify.estimator.librosa.LibrosaTempoEstimator')
+    librosa = import_string(
+        'precountify.estimator.librosa.LibrosaTempoEstimator')
     assert type(librosa) == type(LibrosaTempoEstimator)
 
     madmom = import_string('precountify.estimator.madmom.MadmomTempoEstimator')
