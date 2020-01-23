@@ -1,4 +1,6 @@
 # precountify
+[![PyPI](https://img.shields.io/pypi/v/precountify.svg)](https://python.org/pypi/precountify)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/precountify.svg)](https://python.org/pypi/precountify)
 [![](https://github.com/akiomik/precountify/workflows/Python%20package/badge.svg)](https://github.com/akiomik/precountify/actions?query=workflow%3A%22Python+package%22)
 
 A tool for adding pre-count (count-off) click to audio file.
