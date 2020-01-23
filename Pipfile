@@ -7,7 +7,15 @@ verify_ssl = true
 precountify = {editable = true,extras = ["madmom"],path = "."}
 pytest = "*"
 flake8 = "*"
+twine = "*"
+wheel = "*"
 
 [packages]
-fire = "*"
-librosa = "*"
+
+[scripts]
+test = "pytest"
+lint = "flake8 precountify tests"
+build = "python setup.py sdist bdist_wheel"
+clean = "rm -rf build dist precountify.egg-info"
+test-upload = "twine upload -s -r test dist/*"
+upload = "twine upload -s -r pypi dist/*"

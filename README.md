@@ -3,6 +3,22 @@
 
 A tool for adding pre-count (count-off) click to audio file.
 
+## Requirements
+
+- python >= 3.4
+
+## Install
+
+```sh
+pip install precountify
+
+# with madmom
+pip install precountify[madmom]
+
+# with essentia (linux only)
+pip install precountify[essentia]
+```
+
 ## Usage
 
 ```sh
