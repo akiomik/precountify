@@ -11,6 +11,7 @@ twine = "*"
 wheel = "*"
 
 [packages]
+importlib-metadata = "*"
 
 [scripts]
 test = "pytest"
