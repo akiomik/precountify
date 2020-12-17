@@ -9,6 +9,8 @@ pytest = "*"
 flake8 = "*"
 twine = "*"
 wheel = "*"
+madmom = "*"
+typing_extensions = {markers="python_version >= '3.4' and python_version < '3.8'"}
 
 [packages]
 importlib-metadata = "*"
