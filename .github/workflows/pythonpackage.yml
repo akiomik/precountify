@@ -17,6 +17,14 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: ${{ matrix.python-version }}
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/.cache/pip
+          ~/.cache/pipenv
+        key: ${{ runner.os }}-pip-pipenv-${{ hashFiles('**/Pipfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-pipenv-
     - name: Install dependencies
       run: |
         sudo apt-get update && sudo apt-get install libsndfile1
